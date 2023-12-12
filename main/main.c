@@ -53,27 +53,22 @@ void Initialize_UART() {
     };
 
     uart_param_config(UART_NUM_0, &uart_config);
-    uart_set_pin(UART_NUM_0, 35, 34, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE);
+    uart_set_pin(UART_NUM_0, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE);
     uart_driver_install(UART_NUM_0, 256, 0, 0, NULL, 0);
 }
 
 /**********************************************************************/
 void app_main() {
-    Initialize_GPIO();      /*Inicializa los pines GPIO*/
-    Initialize_UART();      /*Inicializa la comuniación UART*/
-    //printf("Sistema: OFF.");
+    Initialize_GPIO();                /*Inicializa los pines GPIO*/
+    Initialize_UART();                /*Inicializa la comuniación UART*/
+    uart_write_bytes(UART_NUM_0, "\nSistema: OFF.", 13);
 
     while(1) {
         if (Enc_Apg_State == 1) {
-            char mensaje[50];
-            
-            //printf("Sistema: ON\n");
+            uart_write_bytes(UART_NUM_0, "\nSistema: ON.", 12);
             LED_Status = !LED_Status;
             gpio_set_level(LED_PIN, LED_Status);
-            vTaskDelay(pdMS_TO_TICKS(500));     /*Esperar 500 milisegundos*/
-
-            sprintf(mensaje, "Estado del sistema: %s\n", Enc_Apg_State ? "Encendido" : "Apagado");
-            uart_write_bytes(UART_NUM_0, mensaje, strlen(mensaje));
         }
+        vTaskDelay(pdMS_TO_TICKS(500));     /*Esperar 500 milisegundos*/
     }
 }
