@@ -4,12 +4,11 @@
 #include "freertos/task.h"
 #include "esp_system.h"
 #include "esp_event.h"
-#include "esp_event_loop.h"
 #include "driver/gpio.h"
 #include "driver/uart.h"
 
-#define Enc_Apg_Btn 4
-#define LED_PIN 14
+#define Enc_Apg_Btn GPIO_NUM_18
+#define LED_PIN GPIO_NUM_5
 
 volatile bool Enc_Apg_State = false;
 volatile bool LED_Status = false;
@@ -19,7 +18,7 @@ void Initialize_UART();
 
 /*Manejador de interrupción para el botón ON/OFF*/
 void IRAM_ATTR Enc_Apg_isr_handler(void* arg) {
-    Enc_Apg_State = 1;                          /*Encender el sistema al presionar*/
+    Enc_Apg_State = true;                          /*Encender el sistema al presionar*/
 }
 
 /*Inicializar GPIO*/
@@ -27,14 +26,15 @@ void Initialize_GPIO() {
     gpio_config_t io_conf;
 
     /*Configura Enc_Apg_Btn*/
-    io_conf.pin_bit_mask = (1ULL << Enc_Apg_Btn);
+    io_conf.pin_bit_mask = (0x01 << Enc_Apg_Btn);
     io_conf.mode = GPIO_MODE_INPUT;             /*Como entrada*/
-    io_conf.intr_type = GPIO_INTR_POSEDGE;      /*Interrupción en flanco de subida y bajada*/
+    io_conf.intr_type = GPIO_INTR_NEGEDGE;      /*Interrupción en flanco de bajada*/
     io_conf.pull_up_en = GPIO_PULLUP_ENABLE;    /*Resistencia pullup*/
+    io_conf.pull_down_en = GPIO_PULLDOWN_DISABLE;    /*Resistencia pullup*/
     gpio_config(&io_conf);
 
     /*Configura LED_PIN*/
-    io_conf.pin_bit_mask = (1ULL << LED_PIN);
+    io_conf.pin_bit_mask = (0x01 << LED_PIN);
     io_conf.mode = GPIO_MODE_OUTPUT;            /*Como salida*/
     gpio_config(&io_conf);
 
@@ -53,21 +53,25 @@ void Initialize_UART() {
     };
 
     uart_param_config(UART_NUM_0, &uart_config);
-    uart_set_pin(UART_NUM_0, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE);
+    uart_set_pin(UART_NUM_0, 35, 34, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE);
     uart_driver_install(UART_NUM_0, 256, 0, 0, NULL, 0);
 }
 
+/**********************************************************************/
 void app_main() {
     Initialize_GPIO();      /*Inicializa los pines GPIO*/
     Initialize_UART();      /*Inicializa la comuniación UART*/
+    //printf("Sistema: OFF.");
 
     while(1) {
         if (Enc_Apg_State == 1) {
-            printf("Sistema: ON\n");
+            char mensaje[50];
+            
+            //printf("Sistema: ON\n");
             LED_Status = !LED_Status;
             gpio_set_level(LED_PIN, LED_Status);
             vTaskDelay(pdMS_TO_TICKS(500));     /*Esperar 500 milisegundos*/
-            char mensaje[50];
+
             sprintf(mensaje, "Estado del sistema: %s\n", Enc_Apg_State ? "Encendido" : "Apagado");
             uart_write_bytes(UART_NUM_0, mensaje, strlen(mensaje));
         }

@@ -1,7 +1,7 @@
 {
     "version":            "1",
     "project_name":       "AC_Project_ESP32",
-    "project_version":    "1",
+    "project_version":    "6d732d9-dirty",
     "project_path":       "C:/Users/tony_/OneDrive/Escritorio/ESP32/AC_Project_ESP32",
     "idf_path":           "C:/Users/tony_/.espressif/esp-idf",
     "build_dir":          "C:/Users/tony_/OneDrive/Escritorio/ESP32/AC_Project_ESP32/build",

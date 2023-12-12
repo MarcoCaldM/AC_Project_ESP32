@@ -1,0 +1,297 @@
+[0;33m--- WARNING: GDB cannot open serial ports accessed as COMx[0m
+[0;33m--- Using \\.\COM7 instead...[0m
+[0;33m--- esp-idf-monitor 1.3.4 on \\.\COM7 115200 ---[0m
+[0;33m--- Quit: Ctrl+] | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H ---[0m
+[0;33m0x40080400: _init at ??:?
+[0m
+[0;33m0x400811e8: call_start_cpu1 at C:/Users/tony_/.espressif/esp-idf/components/esp_system/port/cpu_start.c:157
+[0m
+[0;33m0x400da013: task_wdt_timeout_handling at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:461 (discriminator 3)
+[0m
+[0;33m0x400da19a: task_wdt_isr at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:585
+[0m
+[0;33m0x40082a79: _xt_lowint1 at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/xtensa_vectors.S:1240
+[0m
+[0;33m0x400d59b3: app_main at C:/Users/tony_/OneDrive/Escritorio/ESP32/AC_Project_ESP32/main/main.c:65
+[0m
+[0;33m0x400e9e9c: main_task at C:/Users/tony_/.espressif/esp-idf/components/freertos/app_startup.c:208 (discriminator 13)
+[0m
+[0;33m0x40088cb9: vPortTaskWrapper at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:162
+[0m
+[0;33m0x400da013: task_wdt_timeout_handling at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:461 (discriminator 3)
+[0m
+[0;33m0x400da19a: task_wdt_isr at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:585
+[0m
+[0;33m0x40082a79: _xt_lowint1 at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/xtensa_vectors.S:1240
+[0m
+[0;33m0x400d59b3: app_main at C:/Users/tony_/OneDrive/Escritorio/ESP32/AC_Project_ESP32/main/main.c:65
+[0m
+[0;33m0x400e9e9c: main_task at C:/Users/tony_/.espressif/esp-idf/components/freertos/app_startup.c:208 (discriminator 13)
+[0m
+[0;33m0x40088cb9: vPortTaskWrapper at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:162
+[0m
+[0;33m0x400da013: task_wdt_timeout_handling at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:461 (discriminator 3)
+[0m
+[0;33m0x400da19a: task_wdt_isr at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:585
+[0m
+[0;33m0x40082a79: _xt_lowint1 at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/xtensa_vectors.S:1240
+[0m
+[0;33m0x400d59b3: app_main at C:/Users/tony_/OneDrive/Escritorio/ESP32/AC_Project_ESP32/main/main.c:65
+[0m
+[0;33m0x400e9e9c: main_task at C:/Users/tony_/.espressif/esp-idf/components/freertos/app_startup.c:208 (discriminator 13)
+[0m
+[0;33m0x40088cb9: vPortTaskWrapper at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:162
+[0m
+[0;33m0x400da013: task_wdt_timeout_handling at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:461 (discriminator 3)
+[0m
+[0;33m0x400da19a: task_wdt_isr at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:585
+[0m
+[0;33m0x40082a79: _xt_lowint1 at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/xtensa_vectors.S:1240
+[0m
+[0;33m0x400d59b3: app_main at C:/Users/tony_/OneDrive/Escritorio/ESP32/AC_Project_ESP32/main/main.c:65
+[0m
+[0;33m0x400e9e9c: main_task at C:/Users/tony_/.espressif/esp-idf/components/freertos/app_startup.c:208 (discriminator 13)
+[0m
+[0;33m0x40088cb9: vPortTaskWrapper at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:162
+[0m
+[0;33m0x400da013: task_wdt_timeout_handling at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:461 (discriminator 3)
+[0m
+[0;33m0x400da19a: task_wdt_isr at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:585
+[0m
+[0;33m0x40082a79: _xt_lowint1 at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/xtensa_vectors.S:1240
+[0m
+[0;33m0x400d59b3: app_main at C:/Users/tony_/OneDrive/Escritorio/ESP32/AC_Project_ESP32/main/main.c:65
+[0m
+[0;33m0x400e9e9c: main_task at C:/Users/tony_/.espressif/esp-idf/components/freertos/app_startup.c:208 (discriminator 13)
+[0m
+[0;33m0x40088cb9: vPortTaskWrapper at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:162
+[0m
+[0;33m0x400da013: task_wdt_timeout_handling at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:461 (discriminator 3)
+[0m
+[0;33m0x400da19a: task_wdt_isr at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:585
+[0m
+[0;33m0x40082a79: _xt_lowint1 at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/xtensa_vectors.S:1240
+[0m
+[0;33m0x400d59b3: app_main at C:/Users/tony_/OneDrive/Escritorio/ESP32/AC_Project_ESP32/main/main.c:65
+[0m
+[0;33m0x400e9e9c: main_task at C:/Users/tony_/.espressif/esp-idf/components/freertos/app_startup.c:208 (discriminator 13)
+[0m
+[0;33m0x40088cb9: vPortTaskWrapper at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:162
+[0m
+[0;33m0x400da013: task_wdt_timeout_handling at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:461 (discriminator 3)
+[0m
+[0;33m0x400da19a: task_wdt_isr at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:585
+[0m
+[0;33m0x40082a79: _xt_lowint1 at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/xtensa_vectors.S:1240
+[0m
+[0;33m0x400d59b3: app_main at C:/Users/tony_/OneDrive/Escritorio/ESP32/AC_Project_ESP32/main/main.c:65
+[0m
+[0;33m0x400e9e9c: main_task at C:/Users/tony_/.espressif/esp-idf/components/freertos/app_startup.c:208 (discriminator 13)
+[0m
+[0;33m0x40088cb9: vPortTaskWrapper at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:162
+[0m
+[0;33m0x400da013: task_wdt_timeout_handling at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:461 (discriminator 3)
+[0m
+[0;33m0x400da19a: task_wdt_isr at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:585
+[0m
+[0;33m0x40082a79: _xt_lowint1 at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/xtensa_vectors.S:1240
+[0m
+[0;33m0x400d59b3: app_main at C:/Users/tony_/OneDrive/Escritorio/ESP32/AC_Project_ESP32/main/main.c:65
+[0m
+[0;33m0x400e9e9c: main_task at C:/Users/tony_/.espressif/esp-idf/components/freertos/app_startup.c:208 (discriminator 13)
+[0m
+[0;33m0x40088cb9: vPortTaskWrapper at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:162
+[0m
+[0;33m0x400da013: task_wdt_timeout_handling at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:461 (discriminator 3)
+[0m
+[0;33m0x400da19a: task_wdt_isr at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:585
+[0m
+[0;33m0x40082a79: _xt_lowint1 at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/xtensa_vectors.S:1240
+[0m
+[0;33m0x400d59b3: app_main at C:/Users/tony_/OneDrive/Escritorio/ESP32/AC_Project_ESP32/main/main.c:65
+[0m
+[0;33m0x400e9e9c: main_task at C:/Users/tony_/.espressif/esp-idf/components/freertos/app_startup.c:208 (discriminator 13)
+[0m
+[0;33m0x40088cb9: vPortTaskWrapper at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:162
+[0m
+[0;33m0x400da013: task_wdt_timeout_handling at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:461 (discriminator 3)
+[0m
+[0;33m0x400da19a: task_wdt_isr at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:585
+[0m
+[0;33m0x40082a79: _xt_lowint1 at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/xtensa_vectors.S:1240
+[0m
+[0;33m0x400d59b3: app_main at C:/Users/tony_/OneDrive/Escritorio/ESP32/AC_Project_ESP32/main/main.c:65
+[0m
+[0;33m0x400e9e9c: main_task at C:/Users/tony_/.espressif/esp-idf/components/freertos/app_startup.c:208 (discriminator 13)
+[0m
+[0;33m0x40088cb9: vPortTaskWrapper at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:162
+[0m
+[0;33m0x40080400: _init at ??:?
+[0m
+[0;33m0x400811e8: call_start_cpu1 at C:/Users/tony_/.espressif/esp-idf/components/esp_system/port/cpu_start.c:157
+[0m
+[0;33m0x40080400: _init at ??:?
+[0m
+[0;33m0x400811e8: call_start_cpu1 at C:/Users/tony_/.espressif/esp-idf/components/esp_system/port/cpu_start.c:157
+[0m
+[0;33m0x400da013: task_wdt_timeout_handling at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:461 (discriminator 3)
+[0m
+[0;33m0x400da19a: task_wdt_isr at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:585
+[0m
+[0;33m0x40082a79: _xt_lowint1 at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/xtensa_vectors.S:1240
+[0m
+[0;33m0x400d59b3: app_main at C:/Users/tony_/OneDrive/Escritorio/ESP32/AC_Project_ESP32/main/main.c:65
+[0m
+[0;33m0x400e9e9c: main_task at C:/Users/tony_/.espressif/esp-idf/components/freertos/app_startup.c:208 (discriminator 13)
+[0m
+[0;33m0x40088cb9: vPortTaskWrapper at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:162
+[0m
+[0;33m0x400da013: task_wdt_timeout_handling at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:461 (discriminator 3)
+[0m
+[0;33m0x400da19a: task_wdt_isr at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:585
+[0m
+[0;33m0x40082a79: _xt_lowint1 at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/xtensa_vectors.S:1240
+[0m
+[0;33m0x400d59b3: app_main at C:/Users/tony_/OneDrive/Escritorio/ESP32/AC_Project_ESP32/main/main.c:65
+[0m
+[0;33m0x400e9e9c: main_task at C:/Users/tony_/.espressif/esp-idf/components/freertos/app_startup.c:208 (discriminator 13)
+[0m
+[0;33m0x40088cb9: vPortTaskWrapper at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:162
+[0m
+[0;33m0x400da013: task_wdt_timeout_handling at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:461 (discriminator 3)
+[0m
+[0;33m0x400da19a: task_wdt_isr at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:585
+[0m
+[0;33m0x40082a79: _xt_lowint1 at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/xtensa_vectors.S:1240
+[0m
+[0;33m0x400d59b3: app_main at C:/Users/tony_/OneDrive/Escritorio/ESP32/AC_Project_ESP32/main/main.c:65
+[0m
+[0;33m0x400e9e9c: main_task at C:/Users/tony_/.espressif/esp-idf/components/freertos/app_startup.c:208 (discriminator 13)
+[0m
+[0;33m0x40088cb9: vPortTaskWrapper at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:162
+[0m
+[0;33m0x400da013: task_wdt_timeout_handling at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:461 (discriminator 3)
+[0m
+[0;33m0x400da19a: task_wdt_isr at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:585
+[0m
+[0;33m0x40082a79: _xt_lowint1 at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/xtensa_vectors.S:1240
+[0m
+[0;33m0x400d59b3: app_main at C:/Users/tony_/OneDrive/Escritorio/ESP32/AC_Project_ESP32/main/main.c:65
+[0m
+[0;33m0x400e9e9c: main_task at C:/Users/tony_/.espressif/esp-idf/components/freertos/app_startup.c:208 (discriminator 13)
+[0m
+[0;33m0x40088cb9: vPortTaskWrapper at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:162
+[0m
+[0;33m0x400da013: task_wdt_timeout_handling at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:461 (discriminator 3)
+[0m
+[0;33m0x400da19a: task_wdt_isr at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:585
+[0m
+[0;33m0x40082a79: _xt_lowint1 at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/xtensa_vectors.S:1240
+[0m
+[0;33m0x400d59b3: app_main at C:/Users/tony_/OneDrive/Escritorio/ESP32/AC_Project_ESP32/main/main.c:65
+[0m
+[0;33m0x400e9e9c: main_task at C:/Users/tony_/.espressif/esp-idf/components/freertos/app_startup.c:208 (discriminator 13)
+[0m
+[0;33m0x40088cb9: vPortTaskWrapper at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:162
+[0m
+[0;33m0x400da013: task_wdt_timeout_handling at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:461 (discriminator 3)
+[0m
+[0;33m0x400da19a: task_wdt_isr at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:585
+[0m
+[0;33m0x40082a79: _xt_lowint1 at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/xtensa_vectors.S:1240
+[0m
+[0;33m0x400d59b3: app_main at C:/Users/tony_/OneDrive/Escritorio/ESP32/AC_Project_ESP32/main/main.c:65
+[0m
+[0;33m0x400e9e9c: main_task at C:/Users/tony_/.espressif/esp-idf/components/freertos/app_startup.c:208 (discriminator 13)
+[0m
+[0;33m0x40088cb9: vPortTaskWrapper at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:162
+[0m
+[0;33m0x400da013: task_wdt_timeout_handling at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:461 (discriminator 3)
+[0m
+[0;33m0x400da19a: task_wdt_isr at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:585
+[0m
+[0;33m0x40082a79: _xt_lowint1 at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/xtensa_vectors.S:1240
+[0m
+[0;33m0x400d59b3: app_main at C:/Users/tony_/OneDrive/Escritorio/ESP32/AC_Project_ESP32/main/main.c:65
+[0m
+[0;33m0x400e9e9c: main_task at C:/Users/tony_/.espressif/esp-idf/components/freertos/app_startup.c:208 (discriminator 13)
+[0m
+[0;33m0x40088cb9: vPortTaskWrapper at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:162
+[0m
+[0;33m0x400da013: task_wdt_timeout_handling at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:461 (discriminator 3)
+[0m
+[0;33m0x400da19a: task_wdt_isr at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:585
+[0m
+[0;33m0x40082a79: _xt_lowint1 at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/xtensa_vectors.S:1240
+[0m
+[0;33m0x400d59b3: app_main at C:/Users/tony_/OneDrive/Escritorio/ESP32/AC_Project_ESP32/main/main.c:65
+[0m
+[0;33m0x400e9e9c: main_task at C:/Users/tony_/.espressif/esp-idf/components/freertos/app_startup.c:208 (discriminator 13)
+[0m
+[0;33m0x40088cb9: vPortTaskWrapper at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:162
+[0m
+[0;33m0x400da013: task_wdt_timeout_handling at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:461 (discriminator 3)
+[0m
+[0;33m0x400da19a: task_wdt_isr at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:585
+[0m
+[0;33m0x40082a79: _xt_lowint1 at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/xtensa_vectors.S:1240
+[0m
+[0;33m0x400d59b3: app_main at C:/Users/tony_/OneDrive/Escritorio/ESP32/AC_Project_ESP32/main/main.c:65
+[0m
+[0;33m0x400e9e9c: main_task at C:/Users/tony_/.espressif/esp-idf/components/freertos/app_startup.c:208 (discriminator 13)
+[0m
+[0;33m0x40088cb9: vPortTaskWrapper at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:162
+[0m
+[0;33m0x400da013: task_wdt_timeout_handling at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:461 (discriminator 3)
+[0m
+[0;33m0x400da19a: task_wdt_isr at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:585
+[0m
+[0;33m0x40082a79: _xt_lowint1 at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/xtensa_vectors.S:1240
+[0m
+[0;33m0x400d59b3: app_main at C:/Users/tony_/OneDrive/Escritorio/ESP32/AC_Project_ESP32/main/main.c:65
+[0m
+[0;33m0x400e9e9c: main_task at C:/Users/tony_/.espressif/esp-idf/components/freertos/app_startup.c:208 (discriminator 13)
+[0m
+[0;33m0x40088cb9: vPortTaskWrapper at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:162
+[0m
+[0;33m0x400da013: task_wdt_timeout_handling at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:461 (discriminator 3)
+[0m
+[0;33m0x400da19a: task_wdt_isr at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:585
+[0m
+[0;33m0x40082a79: _xt_lowint1 at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/xtensa_vectors.S:1240
+[0m
+[0;33m0x400d59b3: app_main at C:/Users/tony_/OneDrive/Escritorio/ESP32/AC_Project_ESP32/main/main.c:65
+[0m
+[0;33m0x400e9e9c: main_task at C:/Users/tony_/.espressif/esp-idf/components/freertos/app_startup.c:208 (discriminator 13)
+[0m
+[0;33m0x40088cb9: vPortTaskWrapper at C:/Users/tony_/.espressif/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:162
+[0m
+[0;33m0x400da013: task_wdt_timeout_handling at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:461 (discriminator 3)
+[0m
+[0;33m0x400da19a: task_wdt_isr at C:/Users/tony_/.espressif/esp-idf/components/esp_system/task_wdt/task_wdt.c:585
+[0m
+[0m
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\tony_\.espressif\python_env\idf5.1_py3.11_env\Lib\site-packages\esp_idf_monitor\__main__.py", line 4, in <module>
+    main()
+  File "C:\Users\tony_\.espressif\python_env\idf5.1_py3.11_env\Lib\site-packages\esp_idf_monitor\idf_monitor.py", line 432, in main
+    monitor.main_loop()
+  File "C:\Users\tony_\.espressif\python_env\idf5.1_py3.11_env\Lib\site-packages\esp_idf_monitor\idf_monitor.py", line 178, in main_loop
+    self._main_loop()
+  File "C:\Users\tony_\.espressif\python_env\idf5.1_py3.11_env\Lib\site-packages\esp_idf_monitor\idf_monitor.py", line 294, in _main_loop
+    super()._main_loop()
+  File "C:\Users\tony_\.espressif\python_env\idf5.1_py3.11_env\Lib\site-packages\esp_idf_monitor\idf_monitor.py", line 226, in _main_loop
+    self.serial_handler.handle_serial_input(data, self.console_parser, self.coredump,  # type: ignore
+  File "C:\Users\tony_\.espressif\python_env\idf5.1_py3.11_env\Lib\site-packages\esp_idf_monitor\base\serial_handler.py", line 127, in handle_serial_input
+    self.logger.handle_possible_pc_address_in_line(line_strip)
+  File "C:\Users\tony_\.espressif\python_env\idf5.1_py3.11_env\Lib\site-packages\esp_idf_monitor\base\logger.py", line 157, in handle_possible_pc_address_in_line
+    translation = lookup_pc_address(num, self.toolchain_prefix, self.elf_file)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tony_\.espressif\python_env\idf5.1_py3.11_env\Lib\site-packages\esp_idf_monitor\base\output_helpers.py", line 36, in lookup_pc_address
+    translation = subprocess.check_output(cmd, cwd='.')
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "subprocess.py", line 466, in check_output
+  File "subprocess.py", line 571, in run
+subprocess.CalledProcessError: Command '['xtensa-esp32-elf-addr2line', '-pfiaC', '-e', 'C:\\Users\\tony_\\OneDrive\\Escritorio\\ESP32\\AC_Project_ESP32\\build\\AC_Project_ESP32.elf', '0x40082A79']' returned non-zero exit status 1.
