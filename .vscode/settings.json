@@ -23,7 +23,10 @@
         "freertos.h": "c",
         "uart.h": "c",
         "stdio.h": "c",
-        "esp_intr_alloc.h": "c"
+        "esp_intr_alloc.h": "c",
+        "string.h": "c",
+        "projdefs.h": "c",
+        "semphr.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
