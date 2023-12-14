@@ -46,7 +46,7 @@ char mensaje[50];
 
 /*! 
 * Funcion: Enc_Apg_isr_handler
-* Pre-condiciones: 
+* Pre-condiciones: Interrupción de Enc_Apg_btn habilitada e inicializada.
 * Descripcion: Manejador de interrupción para el botón ON/OFF
 * Valores de entrada: Ninguno
 * Valores de salida: Ninguno
@@ -60,7 +60,7 @@ void IRAM_ATTR Enc_Apg_isr_handler(void* arg) {
 
 /*! 
 * Funcion: IN_OUT_isr_handler
-* Pre-condiciones: 
+* Pre-condiciones: Interrupciones de S_IN_btn y S_OUT_Btn habilitadas e inicializadas.
 * Descripcion: Manejador de interrupción para los sensores de entrada y salida
 * Valores de entrada: Ninguno
 * Valores de salida: Ninguno
@@ -77,7 +77,7 @@ void IRAM_ATTR IN_OUT_isr_handler(void* arg) {
 
 /*! 
 * Funcion: Modo_Cool_isr_handler
-* Pre-condiciones: 
+* Pre-condiciones: Interrupciones de Modo_btn y Cool_Btn habilitadas e inicializadas.
 * Descripcion: Manejador de interrupción para los botones Modo y Cool
 * Valores de entrada: Ninguno
 * Valores de salida: Ninguno
@@ -99,8 +99,8 @@ void IRAM_ATTR Modo_Cool_isr_handler(void* arg) {
 
 /*! 
 * Funcion: Initialize_GPIO
-* Pre-condiciones: 
-* Descripcion: Inicializar GPIO
+* Pre-condiciones: Ninguna
+* Descripcion: Inicializar GPIO y sus interrupciones asociadas
 * Valores de entrada: Ninguno
 * Valores de salida: Ninguno
 */ 
@@ -181,7 +181,7 @@ void Initialize_GPIO() {
 
 /*! 
 * Funcion: Initialize_UART
-* Pre-condiciones: 
+* Pre-condiciones: Ninguna
 * Descripcion: Inicializar UART
 * Valores de entrada: Ninguno
 * Valores de salida: Ninguno
@@ -202,7 +202,7 @@ void Initialize_UART() {
 
 /*! 
 * Funcion: Temperature_Control
-* Pre-condiciones: 
+* Pre-condiciones: Ninguna
 * Descripcion: Inicializa el ADC
 * Valores de entrada: Ninguno
 * Valores de salida: Ninguno
@@ -216,7 +216,7 @@ void Initialize_ADC(){
 
 /*! 
 * Funcion: Initialize_OLED
-* Pre-condiciones: 
+* Pre-condiciones: Ninguna
 * Descripcion: Inicializa la pantalla OLED
 * Valores de entrada: Ninguno
 * Valores de salida: Ninguno
@@ -230,8 +230,9 @@ void Initialize_OLED(){
 
 /*! 
 * Funcion: Access_Control
-* Pre-condiciones: 
-* Descripcion: Controla el acceso de las personas en base a 
+* Pre-condiciones: Encendido del sistema y activación de las banderas IN_Pushed u OUT_Pushed
+* Descripcion: Controla el acceso de las personas en base a las banderas de pulsación de IN y OUT
+               modifica los estados de la puerta y la alarma.
 * Valores de entrada: Ninguno
 * Valores de salida: Ninguno
 */  
@@ -276,8 +277,8 @@ void Access_Control(){
 
 /*! 
 * Funcion: Temperature_Control
-* Pre-condiciones: 
-* Descripcion: Controla la lectura e impresión del ADC
+* Pre-condiciones: Activación de la bandera de encendido del sistema (Enc_Apg_State)
+* Descripcion: Controla la lectura e impresión del ADC por la OLED
 * Valores de entrada: Ninguno
 * Valores de salida: Ninguno
 */  
@@ -294,7 +295,7 @@ void Temperature_Control(){
 
 /*! 
 * Funcion: UART_Print
-* Pre-condiciones: 
+* Pre-condiciones: Activación de la bandera de encendido del sistema (Enc_Apg_State)
 * Descripcion: Imprime los estados del sistema en la UART
 * Valores de entrada: Ninguno
 * Valores de salida: Ninguno
@@ -322,8 +323,8 @@ void UART_Print(){
 
 /*! 
 * Funcion: States_Control
-* Pre-condiciones: 
-* Descripcion: Controla el ventilador en base a los modos seleccionados
+* Pre-condiciones: Activación de la bandera de encendido del sistema (Enc_Apg_State)
+* Descripcion: Controla el estado ventilador en base a los modos seleccionados e imprime en la OLED
 * Valores de entrada: Ninguno
 * Valores de salida: Ninguno
 */  
@@ -362,7 +363,8 @@ void States_Control(){
 /*! 
 * Funcion: OLED_Heartbeat
 * Pre-condiciones: Ninguna
-* Descripcion: 
+* Descripcion: Controla el encendido del LED indicador del sistema y de la alarma RGB, invoca constantemente
+               la función States_Control
 * Valores de entrada: Ninguno
 * Valores de salida: Ninguno
 */  
