@@ -1,7 +1,7 @@
 /*******************************************************************************
 * Title                 :   main 
 * Filename              :   main.c
-* Author                :   Marco Calderón
+* Author                :   Marco Calderón, Javier Perez Macias, Alejandro Morales Holguín
 * Origin Date           :   09/12/2023
 * Version               :   1.0.0
 * Target                :   ESP32

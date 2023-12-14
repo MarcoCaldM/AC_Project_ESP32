@@ -1,18 +1,22 @@
 /*******************************************************************************
 * Title                 :   AControl 
 * Filename              :   AControl.h
-* Author                :   Marco Calderón
+* Author                :   Marco Calderón, Javier Perez Macias, Alejandro Morales Holguín
 * Origin Date           :   11/12/2023
 * Version               :   1.0.0
 * Target                :   ESP32
 ******************************************************************************/
-
+/** @file AControl.h
+ *  @brief 
+ */
 #ifndef _AControl_h_
 #define _AControl_h_
 
 #pragma once
 
-/* Archivos de cabecera del programa*/
+/******************************************************************************
+* Includes
+*******************************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -24,11 +28,12 @@
 #include "driver/gpio.h"
 #include "driver/uart.h"
 #include "driver/adc.h"
-
 #include "ssd1306.h"
 #include "font8x8_basic.h"
 
-/*Definiciones para los pines GPIO y ADC*/
+/******************************************************************************
+* Constantes del preprocesador
+*******************************************************************************/
 #define Enc_Apg_Btn GPIO_NUM_18
 #define Modo_Btn    GPIO_NUM_26
 #define Cool_Btn    GPIO_NUM_25
@@ -55,11 +60,15 @@
 #define CLOSED  0
 #define OPEN    1
 
-/*Variables del sistema*/
+/******************************************************************************
+* Variables
+*******************************************************************************/
 extern bool Enc_Apg_State;
 extern SSD1306_t dev;       /*Estructura de la pantalla OLED*/
 
-/*Funciones externas del sistema*/
+/******************************************************************************
+* Prototipo de funciones
+*******************************************************************************/
 extern void Initialize_GPIO();
 extern void Initialize_UART();
 extern void Initialize_ADC();
@@ -71,3 +80,4 @@ extern void States_Control();
 extern void OLED_Heartbeat();
 
 #endif
+/*************** FIN DEL ARCHIVO ***************************************************************************/

@@ -1,13 +1,21 @@
 /*******************************************************************************
 * Title                 :   AControl_IO
 * Filename              :   AControl_IO.c
-* Author                :   Marco Calderón
+* Author                :   Marco Calderón, Javier Perez Macias, Alejandro Morales Holguín
 * Origin Date           :   11/12/2023
 * Version               :   1.0.0
 * Target                :   ESP32
 ******************************************************************************/
 
+/******************************************************************************
+* Includes
+*******************************************************************************/
+
 #include "AControl.h"
+
+/******************************************************************************
+* Variables
+*******************************************************************************/
 
 /*Variables de control de estados*/
 bool LED_Status = false;
@@ -32,7 +40,17 @@ int Cantidad_Max = 5;
 /*Variable de mensaje para la correcta impresión del UART y la OLED*/
 char mensaje[50];
 
-/*Manejador de interrupción para el botón ON/OFF*/
+/******************************************************************************
+* Definicion de funciones
+*******************************************************************************/
+
+/*! 
+* Funcion: Enc_Apg_isr_handler
+* Pre-condiciones: 
+* Descripcion: Manejador de interrupción para el botón ON/OFF
+* Valores de entrada: Ninguno
+* Valores de salida: Ninguno
+*/ 
 void IRAM_ATTR Enc_Apg_isr_handler(void* arg) {
     if(Enc_Apg_State != ENCENDIDO){
         Enc_Apg_State = true;                          /*Encender el sistema al presionar*/
@@ -40,7 +58,13 @@ void IRAM_ATTR Enc_Apg_isr_handler(void* arg) {
     }
 }
 
-/*Manejador de interrupción para los sensores de entrada y salida*/
+/*! 
+* Funcion: IN_OUT_isr_handler
+* Pre-condiciones: 
+* Descripcion: Manejador de interrupción para los sensores de entrada y salida
+* Valores de entrada: Ninguno
+* Valores de salida: Ninguno
+*/ 
 void IRAM_ATTR IN_OUT_isr_handler(void* arg) {
     if(gpio_get_level(S_IN_Btn) == false){      /*Al detectar una entrada*/
         IN_Pushed = true;                       /*Activa la bandera de acceso*/
@@ -50,7 +74,14 @@ void IRAM_ATTR IN_OUT_isr_handler(void* arg) {
     }
 }
 
-/*Manejador de interrupción para los botones Modo y Cool*/
+
+/*! 
+* Funcion: Modo_Cool_isr_handler
+* Pre-condiciones: 
+* Descripcion: Manejador de interrupción para los botones Modo y Cool
+* Valores de entrada: Ninguno
+* Valores de salida: Ninguno
+*/ 
 void IRAM_ATTR Modo_Cool_isr_handler(void* arg) {
     if(Enc_Apg_State == ENCENDIDO){         /*Solo si el sistema está encendido*/
         if(gpio_get_level(Modo_Btn) == false){      /*Si se pulsa el botón de Modo se cambia e imprime*/
@@ -66,7 +97,13 @@ void IRAM_ATTR Modo_Cool_isr_handler(void* arg) {
     }   
 }
 
-/*Inicializar GPIO*/
+/*! 
+* Funcion: Initialize_GPIO
+* Pre-condiciones: 
+* Descripcion: Inicializar GPIO
+* Valores de entrada: Ninguno
+* Valores de salida: Ninguno
+*/ 
 void Initialize_GPIO() {
     gpio_config_t io_conf;
 
@@ -142,7 +179,13 @@ void Initialize_GPIO() {
     gpio_isr_handler_add(S_OUT_Btn, IN_OUT_isr_handler, NULL);
 }
 
-/*Inicializar UART*/
+/*! 
+* Funcion: Initialize_UART
+* Pre-condiciones: 
+* Descripcion: Inicializar UART
+* Valores de entrada: Ninguno
+* Valores de salida: Ninguno
+*/ 
 void Initialize_UART() {
     uart_config_t uart_config = {
         .baud_rate = 115200,                    /*BaudRate: 115200*/
@@ -157,14 +200,27 @@ void Initialize_UART() {
     uart_driver_install(UART_NUM_0, 256, 0, 0, NULL, 0);
 }
 
-/*Inicializa el ADC*/
+/*! 
+* Funcion: Temperature_Control
+* Pre-condiciones: 
+* Descripcion: Inicializa el ADC
+* Valores de entrada: Ninguno
+* Valores de salida: Ninguno
+*/  
 void Initialize_ADC(){
     adc1_config_width(ADC_WIDTH_BIT_12);                    /*Ancho de banda de 12 bits (0 a 4095)*/
     adc1_config_channel_atten(TEMPAMB_PIN, ADC_ATTEN_DB_0);     /*Ch1 para leer el NTC*/
     adc1_config_channel_atten(TEMCOR_PIN, ADC_ATTEN_DB_0);  /*Ch3 para leer el potenciómetrom*/
 }
 
-/*Inicializa la pantalla OLED*/
+
+/*! 
+* Funcion: Initialize_OLED
+* Pre-condiciones: 
+* Descripcion: Inicializa la pantalla OLED
+* Valores de entrada: Ninguno
+* Valores de salida: Ninguno
+*/  
 void Initialize_OLED(){
 	i2c_master_init(&dev, CONFIG_SDA_GPIO, CONFIG_SCL_GPIO, CONFIG_RESET_GPIO); /*Se cofiguran los pines de la oled*/
 	ssd1306_init(&dev, 128, 64);        /*Se configura la resolución*/
@@ -172,7 +228,13 @@ void Initialize_OLED(){
     //ssd1306_display_text(&dev, 0, "OLED Iniciado", 14, false);
 }
 
-/*Controla el acceso de las personas en base a */
+/*! 
+* Funcion: Access_Control
+* Pre-condiciones: 
+* Descripcion: Controla el acceso de las personas en base a 
+* Valores de entrada: Ninguno
+* Valores de salida: Ninguno
+*/  
 void Access_Control(){
     if(IN_Pushed == true){      /*Si se pulsa el botón de entrada...*/
         if(Cantidad_Actual < Cantidad_Max && TEMCOR < 37){
@@ -212,7 +274,13 @@ void Access_Control(){
     }
 }
 
-/*Controla la lectura e impresión del ADC*/
+/*! 
+* Funcion: Temperature_Control
+* Pre-condiciones: 
+* Descripcion: Controla la lectura e impresión del ADC
+* Valores de entrada: Ninguno
+* Valores de salida: Ninguno
+*/  
 void Temperature_Control(){
     TEMPAMB = (adc1_get_raw(TEMPAMB_PIN) * 50.0) / 4095.0;    /*Lee el valor del TEMPAMB (pot 10K; 0 a 50 grados)*/
     sprintf(mensaje, "TEMPAMB: %0.2f C\n", TEMPAMB);
@@ -224,7 +292,14 @@ void Temperature_Control(){
     vTaskDelay(pdMS_TO_TICKS(50));                          /*Espera 50 milisegundos para evitar errores*/
 }
 
-/*Imprime los estados del sistema en la UART*/
+/*! 
+* Funcion: UART_Print
+* Pre-condiciones: 
+* Descripcion: Imprime los estados del sistema en la UART
+* Valores de entrada: Ninguno
+* Valores de salida: Ninguno
+*/  
+
 void UART_Print(){
     sprintf(mensaje, "\nSistema: %s          ", Enc_Apg_State ? "ON" : "OFF");  /*Estado del sistema*/
     uart_write_bytes(UART_NUM_0, mensaje, strlen(mensaje));
@@ -245,7 +320,13 @@ void UART_Print(){
     vTaskDelay(pdMS_TO_TICKS(500));                          /*Espera 500 milisegundos para volver a imprimir*/
 }
 
-/*Controla el ventilador en base a los modos seleccionados*/
+/*! 
+* Funcion: States_Control
+* Pre-condiciones: 
+* Descripcion: Controla el ventilador en base a los modos seleccionados
+* Valores de entrada: Ninguno
+* Valores de salida: Ninguno
+*/  
 void States_Control(){
     if(Modo_State == AUTO){             /*Sistema de temperatura en modo automático*/
         switch(Cool_Heat_State){
@@ -277,6 +358,14 @@ void States_Control(){
     vTaskDelay(pdMS_TO_TICKS(50));     /*Espera 50 milisegundos para evitar errores*/
 }
 
+
+/*! 
+* Funcion: OLED_Heartbeat
+* Pre-condiciones: Ninguna
+* Descripcion: 
+* Valores de entrada: Ninguno
+* Valores de salida: Ninguno
+*/  
 void OLED_Heartbeat(){
     while (true){
         if (Enc_Apg_State == ENCENDIDO){    /*Solo si el sistema está encendido*/
@@ -298,3 +387,5 @@ void OLED_Heartbeat(){
         vTaskDelay(pdMS_TO_TICKS(100));     /*Esperar 200 milisegundos*/
     }
 }
+
+/*************** FINAL DE LAS FUNCIONES ***************************************************************************/
