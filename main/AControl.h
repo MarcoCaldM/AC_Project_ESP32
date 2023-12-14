@@ -32,19 +32,28 @@
 #define Enc_Apg_Btn GPIO_NUM_18
 #define Modo_Btn    GPIO_NUM_26
 #define Cool_Btn    GPIO_NUM_25
-#define S_IN_Btn    GPIO_NUM_13
-#define S_OUT_Btn   GPIO_NUM_12
+#define S_IN_Btn    GPIO_NUM_2
+#define S_OUT_Btn   GPIO_NUM_4
 
-#define LED_PIN     GPIO_NUM_5
+#define LED_PIN         GPIO_NUM_5
+#define RED_LED_PIN     GPIO_NUM_14
+#define BLUE_LED_PIN    GPIO_NUM_12
+#define GREEN_LED_PIN   GPIO_NUM_13
+
+#define TEMCOR_PIN  ADC1_CHANNEL_6
+#define NTC_PIN     ADC1_CHANNEL_0
 
 /*Definiciones del sistema*/
 #define ENCENDIDO   true
 #define APAGADO     false
 
 #define AUTO    0
+#define OFF     0
 #define ON      1
 #define COOL    0
 #define HEAT    1
+#define CLOSED  0
+#define OPEN    1
 
 /*Variables del sistema*/
 extern bool Enc_Apg_State;
@@ -53,7 +62,11 @@ extern SSD1306_t dev;       /*Estructura de la pantalla OLED*/
 /*Funciones externas del sistema*/
 extern void Initialize_GPIO();
 extern void Initialize_UART();
+extern void Initialize_ADC();
 extern void Initialize_OLED();
-extern void LED_Heartbeat();
+extern void Access_Control();
+extern void Temperature_Control();
+extern void States_Control();
+extern void OLED_Heartbeat();
 
 #endif
