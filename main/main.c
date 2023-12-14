@@ -9,6 +9,7 @@
 
 #include "AControl.h"
 
+/*Variables globales del sistema*/
 bool Enc_Apg_State = false;
 SSD1306_t dev;
 
@@ -21,13 +22,15 @@ void app_main() {
     uart_write_bytes(UART_NUM_0, "\nSistema: OFF.", 13);    /*Informa que el sistema aún no se enciende*/
     ssd1306_display_text(&dev, 0, "Sistema: OFF", 13, false); /*Y también lo imprime por la OLED*/
 
-    xTaskCreate(OLED_Heartbeat, "OLED_Hearbeat", 1024 * 2, NULL, 2, NULL);    /*Crea una tarea para el parpadeo del LED*/
+     /*Crea una tarea para el parpadeo del LED y la impresión constante del los estados por la OLED*/
+    xTaskCreate(OLED_Heartbeat, "OLED_Hearbeat", 1024 * 2, NULL, 2, NULL);
 
     while(true) {
         if (Enc_Apg_State == ENCENDIDO) {   /*Si el sistema se enciende...*/
             ssd1306_display_text(&dev, 0, "Sistema: ON", 12, false);    /*Informa por la OLED*/
             Access_Control();
             Temperature_Control();
+            UART_Print();
         }
         vTaskDelay(pdMS_TO_TICKS(500));     /*Esperar 500 milisegundos*/
     }

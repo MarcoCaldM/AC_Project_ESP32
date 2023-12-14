@@ -28,7 +28,7 @@
 #include "ssd1306.h"
 #include "font8x8_basic.h"
 
-/*Definiciones para los pines GPIO*/
+/*Definiciones para los pines GPIO y ADC*/
 #define Enc_Apg_Btn GPIO_NUM_18
 #define Modo_Btn    GPIO_NUM_26
 #define Cool_Btn    GPIO_NUM_25
@@ -40,10 +40,10 @@
 #define BLUE_LED_PIN    GPIO_NUM_12
 #define GREEN_LED_PIN   GPIO_NUM_13
 
-#define TEMCOR_PIN  ADC1_CHANNEL_6
-#define NTC_PIN     ADC1_CHANNEL_0
+#define TEMCOR_PIN      ADC1_CHANNEL_6
+#define TEMPAMB_PIN     ADC1_CHANNEL_7
 
-/*Definiciones del sistema*/
+/*Definiciones del sistema y sus estados*/
 #define ENCENDIDO   true
 #define APAGADO     false
 
@@ -66,6 +66,7 @@ extern void Initialize_ADC();
 extern void Initialize_OLED();
 extern void Access_Control();
 extern void Temperature_Control();
+extern void UART_Print();
 extern void States_Control();
 extern void OLED_Heartbeat();
 
