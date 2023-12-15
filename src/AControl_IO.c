@@ -13,6 +13,7 @@
 
 #include "AControl.h"
 
+
 /******************************************************************************
 * Variables
 *******************************************************************************/
@@ -21,12 +22,8 @@
 bool LED_Status = false;
 bool RGB_Status = false;
 bool Alarma_State = OFF;
-bool Modo_State = ON;
-bool Cool_Heat_State = HEAT;
 bool Fan_State = OFF;
 bool Door_State = CLOSED;
-bool IN_Pushed = false;
-bool OUT_Pushed = false;
 
 /*Variables de control de temperatura*/
 double SetPoint = 25.0;
@@ -37,66 +34,10 @@ double TEMCOR;
 int Cantidad_Actual = 0;
 int Cantidad_Max = 5;
 
-/*Variable de mensaje para la correcta impresión del UART y la OLED*/
-char mensaje[50];
 
 /******************************************************************************
 * Definicion de funciones
 *******************************************************************************/
-
-/*! 
-* Funcion: Enc_Apg_isr_handler
-* Pre-condiciones: Interrupción de Enc_Apg_btn habilitada e inicializada.
-* Descripcion: Manejador de interrupción para el botón ON/OFF
-* Valores de entrada: Ninguno
-* Valores de salida: Ninguno
-*/ 
-void IRAM_ATTR Enc_Apg_isr_handler(void* arg) {
-    if(Enc_Apg_State != ENCENDIDO){
-        Enc_Apg_State = true;                          /*Encender el sistema al presionar*/
-        uart_write_bytes(UART_NUM_0, "\nSistema: ON.", 12);     /*Informa por la UART*/
-    }
-}
-
-/*! 
-* Funcion: IN_OUT_isr_handler
-* Pre-condiciones: Interrupciones de S_IN_btn y S_OUT_Btn habilitadas e inicializadas.
-* Descripcion: Manejador de interrupción para los sensores de entrada y salida
-* Valores de entrada: Ninguno
-* Valores de salida: Ninguno
-*/ 
-void IRAM_ATTR IN_OUT_isr_handler(void* arg) {
-    if(gpio_get_level(S_IN_Btn) == false){      /*Al detectar una entrada*/
-        IN_Pushed = true;                       /*Activa la bandera de acceso*/
-    }
-    if(gpio_get_level(S_OUT_Btn) == false){      /*Al detectar una salida*/
-        OUT_Pushed = true;                       /*Activa la bandera de salida*/
-    }
-}
-
-
-/*! 
-* Funcion: Modo_Cool_isr_handler
-* Pre-condiciones: Interrupciones de Modo_btn y Cool_Btn habilitadas e inicializadas.
-* Descripcion: Manejador de interrupción para los botones Modo y Cool
-* Valores de entrada: Ninguno
-* Valores de salida: Ninguno
-*/ 
-void IRAM_ATTR Modo_Cool_isr_handler(void* arg) {
-    if(Enc_Apg_State == ENCENDIDO){         /*Solo si el sistema está encendido*/
-        if(gpio_get_level(Modo_Btn) == false){      /*Si se pulsa el botón de Modo se cambia e imprime*/
-        Modo_State = !Modo_State;
-        sprintf(mensaje, "Modo: %s\n", Modo_State ? "ON" : "AUTO");
-        uart_write_bytes(UART_NUM_0, mensaje, strlen(mensaje));
-        }
-        if(gpio_get_level(Cool_Btn) == false){      /*Si se pulsa el botón de Modo se cambia e imprime*/
-            Cool_Heat_State = !Cool_Heat_State;
-            sprintf(mensaje, "Modo: %s\n", Cool_Heat_State ? "HEAT" : "COOL");
-            uart_write_bytes(UART_NUM_0, mensaje, strlen(mensaje));
-        }
-    }   
-}
-
 /*! 
 * Funcion: Initialize_GPIO
 * Pre-condiciones: Ninguna
@@ -108,44 +49,19 @@ void Initialize_GPIO() {
     gpio_config_t io_conf;
 
     /*Configura Enc_Apg_Btn*/
-    io_conf.pin_bit_mask = (0x01 << Enc_Apg_Btn);
-    io_conf.mode = GPIO_MODE_INPUT;                 /*Como entrada*/
-    io_conf.intr_type = GPIO_INTR_NEGEDGE;          /*Interrupción en flanco de bajada*/
-    io_conf.pull_up_en = GPIO_PULLUP_ENABLE;        /*Resistencia pullup activa*/
-    io_conf.pull_down_en = GPIO_PULLDOWN_DISABLE;   /*Resistencia pulldown desactiva*/
-    gpio_config(&io_conf);
-
+    GPIO_INPUT_ENABLE(Enc_Apg_Btn, PULLUP);
+    
     /*Configura S_IN_Btn*/
-    io_conf.pin_bit_mask = (0x01 << S_IN_Btn);
-    io_conf.mode = GPIO_MODE_INPUT;                 /*Como entrada*/
-    io_conf.intr_type = GPIO_INTR_NEGEDGE;          /*Interrupción en flanco de bajada*/
-    io_conf.pull_up_en = GPIO_PULLUP_ENABLE;        /*Resistencia pullup activa*/
-    io_conf.pull_down_en = GPIO_PULLDOWN_DISABLE;   /*Resistencia pulldown desactiva*/
-    gpio_config(&io_conf);
+    GPIO_INPUT_ENABLE(S_IN_Btn, PULLUP);
 
     /*Configura S_OUT_Btn*/
-    io_conf.pin_bit_mask = (0x01 << S_OUT_Btn);
-    io_conf.mode = GPIO_MODE_INPUT;                 /*Como entrada*/
-    io_conf.intr_type = GPIO_INTR_NEGEDGE;          /*Interrupción en flanco de bajada*/
-    io_conf.pull_up_en = GPIO_PULLUP_ENABLE;        /*Resistencia pullup activa*/
-    io_conf.pull_down_en = GPIO_PULLDOWN_DISABLE;   /*Resistencia pulldown desactiva*/
-    gpio_config(&io_conf);
+    GPIO_INPUT_ENABLE(S_OUT_Btn, PULLUP);
 
     /*Configura Modo_Btn*/
-    io_conf.pin_bit_mask = (0x01 << Modo_Btn);
-    io_conf.mode = GPIO_MODE_INPUT;                 /*Como entrada*/
-    io_conf.intr_type = GPIO_INTR_NEGEDGE;          /*Interrupción en flanco de bajada*/
-    io_conf.pull_up_en = GPIO_PULLUP_ENABLE;        /*Resistencia pullup activa*/
-    io_conf.pull_down_en = GPIO_PULLDOWN_DISABLE;   /*Resistencia pulldown desactiva*/
-    gpio_config(&io_conf);
+    GPIO_INPUT_ENABLE(Modo_Btn, PULLUP);
 
     /*Configura Cool_Btn*/
-    io_conf.pin_bit_mask = (0x01 << Cool_Btn);
-    io_conf.mode = GPIO_MODE_INPUT;                 /*Como entrada*/
-    io_conf.intr_type = GPIO_INTR_NEGEDGE;          /*Interrupción en flanco de bajada*/
-    io_conf.pull_up_en = GPIO_PULLUP_ENABLE;        /*Resistencia pullup activa*/
-    io_conf.pull_down_en = GPIO_PULLDOWN_DISABLE;   /*Resistencia pulldown desactiva*/
-    gpio_config(&io_conf);
+    GPIO_INPUT_ENABLE(Cool_Btn, PULLUP);
 
     /*Configura RED_LED_PIN*/
     io_conf.pin_bit_mask = (0x01 << RED_LED_PIN);
@@ -166,17 +82,13 @@ void Initialize_GPIO() {
     gpio_set_level(BLUE_LED_PIN, true);    /*Apaga el RGB al inicializar*/
 
     /*Configura LED_PIN*/
-    io_conf.pin_bit_mask = (0x01 << LED_PIN);
-    io_conf.mode = GPIO_MODE_OUTPUT;            /*Como salida*/
-    gpio_config(&io_conf);
+    GPIO_OUTPUT_ENABLE(LED_PIN);
 
-    /*Configura las interrupciones de los botones*/
-    gpio_install_isr_service(0);
-    gpio_isr_handler_add(Enc_Apg_Btn, Enc_Apg_isr_handler, (void*) Enc_Apg_Btn);
-    gpio_isr_handler_add(Modo_Btn, Modo_Cool_isr_handler, NULL);
-    gpio_isr_handler_add(Cool_Btn, Modo_Cool_isr_handler, NULL);
-    gpio_isr_handler_add(S_IN_Btn, IN_OUT_isr_handler, NULL);
-    gpio_isr_handler_add(S_OUT_Btn, IN_OUT_isr_handler, NULL);
+    /*Configura FAN_PIN*/
+    GPIO_OUTPUT_ENABLE(FAN_PIN);
+
+    /*Configura DOOR_PIN*/
+    GPIO_OUTPUT_ENABLE(DOOR_PIN);
 }
 
 /*! 
@@ -225,7 +137,6 @@ void Initialize_OLED(){
 	i2c_master_init(&dev, CONFIG_SDA_GPIO, CONFIG_SCL_GPIO, CONFIG_RESET_GPIO); /*Se cofiguran los pines de la oled*/
 	ssd1306_init(&dev, 128, 64);        /*Se configura la resolución*/
     ssd1306_clear_screen(&dev, false);  /*Se limpia la pantalla para empezar a imprimir*/
-    //ssd1306_display_text(&dev, 0, "OLED Iniciado", 14, false);
 }
 
 /*! 
@@ -237,13 +148,15 @@ void Initialize_OLED(){
 * Valores de salida: Ninguno
 */  
 void Access_Control(){
-    if(IN_Pushed == true){      /*Si se pulsa el botón de entrada...*/
+    if(!GPIO_INPUT_READ(S_IN_Btn)){      /*Si se pulsa el botón de entrada...*/
         if(Cantidad_Actual < Cantidad_Max && TEMCOR < 37){
             Door_State = OPEN;
+            GPIO_OUTPUT_SET(DOOR_PIN, !Door_State);
             ssd1306_display_text(&dev, 2, "for 5 seconds", 16, false);  /*Informa al usuario el estado*/
             uart_write_bytes(UART_NUM_0, "\nDoor open for 5 seconds\n", 25);
             vTaskDelay(pdMS_TO_TICKS(5000));     /*Esperar 5 segundos*/
             Door_State = CLOSED;
+            GPIO_OUTPUT_SET(DOOR_PIN, !Door_State);
             ssd1306_clear_line(&dev, 2, false);  /*Borra el mensaje*/
             vTaskDelay(pdMS_TO_TICKS(50));     /*Espera 50 milisegundos para evitar errores*/
             Cantidad_Actual++;
@@ -264,14 +177,12 @@ void Access_Control(){
             ssd1306_clear_line(&dev, 2, false);  /*Borra el mensaje*/
             vTaskDelay(pdMS_TO_TICKS(50));     /*Espera 50 milisegundos para evitar errores*/
         }
-        IN_Pushed = false;      /*Desactiva la bandera*/
     }
-    if(OUT_Pushed == true){     /*Si se pulsa el botón de salida...*/
+    if(!GPIO_INPUT_READ(S_OUT_Btn)){     /*Si se pulsa el botón de salida...*/
         uart_write_bytes(UART_NUM_0, "\nAlguien ha salido\n", 18);
         if(Cantidad_Actual > 0){
             Cantidad_Actual--;
         }
-        OUT_Pushed = false;     /*Desactivva la bandera*/
     }
 }
 
@@ -291,34 +202,6 @@ void Temperature_Control(){
     sprintf(mensaje, "TEMCOR: %0.2f C\n", TEMCOR);
     ssd1306_display_text(&dev, 6, mensaje, strlen(mensaje), false);     /*Y lo informa por la OLED*/
     vTaskDelay(pdMS_TO_TICKS(50));                          /*Espera 50 milisegundos para evitar errores*/
-}
-
-/*! 
-* Funcion: UART_Print
-* Pre-condiciones: Activación de la bandera de encendido del sistema (Enc_Apg_State)
-* Descripcion: Imprime los estados del sistema en la UART
-* Valores de entrada: Ninguno
-* Valores de salida: Ninguno
-*/  
-
-void UART_Print(){
-    sprintf(mensaje, "\nSistema: %s          ", Enc_Apg_State ? "ON" : "OFF");  /*Estado del sistema*/
-    uart_write_bytes(UART_NUM_0, mensaje, strlen(mensaje));
-    sprintf(mensaje, "Setpoint: %0.2f C\n", SetPoint);                            /*Estado de la puerta*/
-    uart_write_bytes(UART_NUM_0, mensaje, strlen(mensaje));
-    sprintf(mensaje, "Personas: %d          ", Cantidad_Actual);    /*Cantidad de personas dentro*/
-    uart_write_bytes(UART_NUM_0, mensaje, strlen(mensaje));
-    sprintf(mensaje, "Fan: %s\n", Fan_State ? "ON" : "OFF");              /*Estado del ventilador*/
-    uart_write_bytes(UART_NUM_0, mensaje, strlen(mensaje));
-    sprintf(mensaje, "Ventilación: %s       ", Modo_State ? "ON" : "AUTO");   /*Modo de la ventilación*/
-    uart_write_bytes(UART_NUM_0, mensaje, strlen(mensaje));
-    sprintf(mensaje, "Modo de control: %s\n", Modo_State ? "HEAT" : "COOL");   /*Modo de control*/
-    uart_write_bytes(UART_NUM_0, mensaje, strlen(mensaje));
-    sprintf(mensaje, "TEMPAMB: %0.2f C     ", TEMPAMB);            /*Valor de TEMPAMB*/
-    uart_write_bytes(UART_NUM_0, mensaje, strlen(mensaje));
-    sprintf(mensaje, "TEMCOR: %0.2f C\n", TEMCOR);                  /*Valor de TEMCOR*/
-    uart_write_bytes(UART_NUM_0, mensaje, strlen(mensaje));
-    vTaskDelay(pdMS_TO_TICKS(500));                          /*Espera 500 milisegundos para volver a imprimir*/
 }
 
 /*! 
@@ -357,6 +240,8 @@ void States_Control(){
     sprintf(mensaje, "FAN: %s\n", Fan_State ? "ON" : "OFF");      /*Verifica el estado del ventilador*/
     ssd1306_display_text(&dev, 4, mensaje, strlen(mensaje), false);     /*Y lo informa por la OLED*/
     vTaskDelay(pdMS_TO_TICKS(50));     /*Espera 50 milisegundos para evitar errores*/
+
+    GPIO_OUTPUT_SET(FAN_PIN, !Fan_State);
 }
 
 
@@ -372,8 +257,7 @@ void OLED_Heartbeat(){
     while (true){
         if (Enc_Apg_State == ENCENDIDO){    /*Solo si el sistema está encendido*/
             LED_Status = !LED_Status;       /*Alterna el estado del LED*/
-            gpio_set_level(LED_PIN, LED_Status);    /*Cambia el valor en el pin de salida*/
-
+            GPIO_OUTPUT_SET(LED_PIN,LED_Status);
             States_Control();           /*Imprime el estado del ventilador y la puerta*/
 
             if(Alarma_State == true){       /*Solo si la alarma está activa*/
@@ -386,7 +270,40 @@ void OLED_Heartbeat(){
                 gpio_set_level(BLUE_LED_PIN, true);
             }
         }
-        vTaskDelay(pdMS_TO_TICKS(100));     /*Esperar 200 milisegundos*/
+        vTaskDelay(pdMS_TO_TICKS(500));     /*Esperar 500 milisegundos*/
+    }
+}
+
+/*! 
+* Funcion: UART_Print
+* Pre-condiciones: Activación de la bandera de encendido del sistema (Enc_Apg_State)
+* Descripcion: Imprime los estados del sistema en la UART
+* Valores de entrada: Ninguno
+* Valores de salida: Ninguno
+*/  
+
+void UART_Print(){
+    while(true){
+        if (Enc_Apg_State){
+            sprintf(mensaje, "\nSistema: %s          ", Enc_Apg_State ? "ON" : "OFF");  /*Estado del sistema*/
+            uart_write_bytes(UART_NUM_0, mensaje, strlen(mensaje));
+            sprintf(mensaje, "Setpoint: %0.2f C\n", SetPoint);                            /*Estado de la puerta*/
+            uart_write_bytes(UART_NUM_0, mensaje, strlen(mensaje));
+            sprintf(mensaje, "Personas: %d          ", Cantidad_Actual);    /*Cantidad de personas dentro*/
+            uart_write_bytes(UART_NUM_0, mensaje, strlen(mensaje));
+            sprintf(mensaje, "Fan: %s\n", Fan_State ? "ON" : "OFF");              /*Estado del ventilador*/
+            uart_write_bytes(UART_NUM_0, mensaje, strlen(mensaje));
+            sprintf(mensaje, "Ventilación: %s       ", Modo_State ? "ON" : "AUTO");   /*Modo de la ventilación*/
+            uart_write_bytes(UART_NUM_0, mensaje, strlen(mensaje));
+            sprintf(mensaje, "Modo de control: %s\n", Cool_Heat_State ? "HEAT" : "COOL");   /*Modo de control*/
+            uart_write_bytes(UART_NUM_0, mensaje, strlen(mensaje));
+            sprintf(mensaje, "TEMPAMB: %0.2f C     ", TEMPAMB);            /*Valor de TEMPAMB*/
+            uart_write_bytes(UART_NUM_0, mensaje, strlen(mensaje));
+            sprintf(mensaje, "TEMCOR: %0.2f C\n", TEMCOR);                  /*Valor de TEMCOR*/
+            uart_write_bytes(UART_NUM_0, mensaje, strlen(mensaje));
+            vTaskDelay(pdMS_TO_TICKS(500));                          /*Espera 500 milisegundos para volver a imprimir*/
+        }
+        vTaskDelay(pdMS_TO_TICKS(50));
     }
 }
 

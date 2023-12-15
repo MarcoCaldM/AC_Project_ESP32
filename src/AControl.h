@@ -31,19 +31,23 @@
 #include "ssd1306.h"
 #include "font8x8_basic.h"
 
+#include "drivers/gpio_drivers.h"
+
 /******************************************************************************
 * Constantes del preprocesador
 *******************************************************************************/
-#define Enc_Apg_Btn GPIO_NUM_18
-#define Modo_Btn    GPIO_NUM_26
-#define Cool_Btn    GPIO_NUM_25
-#define S_IN_Btn    GPIO_NUM_2
-#define S_OUT_Btn   GPIO_NUM_4
+#define Enc_Apg_Btn IO18
+#define Modo_Btn    IO19
+#define Cool_Btn    IO23
+#define S_IN_Btn    IO16
+#define S_OUT_Btn   IO17
 
-#define LED_PIN         GPIO_NUM_5
-#define RED_LED_PIN     GPIO_NUM_14
-#define BLUE_LED_PIN    GPIO_NUM_12
-#define GREEN_LED_PIN   GPIO_NUM_13
+#define FAN_PIN         IO2
+#define DOOR_PIN        IO4
+#define LED_PIN         IO5
+#define RED_LED_PIN     IO14
+#define BLUE_LED_PIN    IO12
+#define GREEN_LED_PIN   IO13
 
 #define TEMCOR_PIN      ADC1_CHANNEL_6
 #define TEMPAMB_PIN     ADC1_CHANNEL_7
@@ -65,6 +69,11 @@
 *******************************************************************************/
 extern bool Enc_Apg_State;
 extern SSD1306_t dev;       /*Estructura de la pantalla OLED*/
+extern bool Modo_State;
+extern bool Cool_Heat_State;
+
+/*Variable de mensaje para la correcta impresión del UART y la OLED*/
+extern char mensaje[50];
 
 /******************************************************************************
 * Prototipo de funciones
