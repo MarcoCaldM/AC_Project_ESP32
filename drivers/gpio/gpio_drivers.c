@@ -20,23 +20,23 @@
 *******************************************************************************/
 
 /*! 
-* Funcion: GPIO_OUT_SET
+* Funcion: GPIO_OUTPUT_SET
 * Pre-condiciones: El puerto debe estar habilitado
 * Descripcion: Asigna un valor de salida (0 o 1) al puerto seleccionado 
 * Valores de entrada: Puerto, Valor de salida 
 * Valores de salida: Ninguno
-*/  
+ */  
 void GPIO_OUTPUT_SET(uint8_t port, bool value){
     //Del puerto 34 al 39 no pueden ser salidas
     switch (value)
     {
         case ON: 
             GPIO_OUT_W1TS   -> REG_IO = (1 << port) * !(port > IO31 && port <= IO33);
-            GPIO_OUT_1_W1TS -> REG_IO = (1 << (port- IO32)) * (port > IO31 && port <= IO33);
+            GPIO_OUT_1_W1TS -> REG_IO = (1 << (port - IO32)) * (port > IO31 && port <= IO33);
             break;
         case OFF:
             GPIO_OUT_W1TC   -> REG_IO = (1 << port) * !(port > IO31 && port <= IO33);
-            GPIO_OUT_1_W1TC -> REG_IO = (1 << (port- IO32)) * (port > IO31 && port <= IO33);
+            GPIO_OUT_1_W1TC -> REG_IO = (1 << (port - IO32)) * (port > IO31 && port <= IO33);
             break;
     }
     return;
@@ -50,9 +50,11 @@ void GPIO_OUTPUT_SET(uint8_t port, bool value){
 * Valores de salida: Ninguno
 */  
 void GPIO_OUTPUT_ENABLE(uint8_t port){
-    GPIO_FUNC_OUT_SEL(port) -> REG |= 0x100;
-    GPIO_ENABLE -> REG_IO   |= (1 << port) * !(port > IO31 && port <= IO39);
-    GPIO_ENABLE_1 -> REG_IO |= (1 << (port - IO32)) * (port > IO31 && port <= IO39);
+    IO_MUX port_selected;
+    port_selected.reg = ioMuxDirections[port]; //Seleccion del puerto
+    port_selected.confirguration.MCU_SEL = 0x02;
+    GPIO_ENABLE -> REG_IO   = (1 << port) * !(port > IO31 && port <= IO39);
+    GPIO_ENABLE_1 -> REG_IO = (1 << (port - IO32)) * (port > IO31 && port <= IO39);
     return;
 }
 
@@ -64,7 +66,6 @@ void GPIO_OUTPUT_ENABLE(uint8_t port){
 * Valores de salida: Ninguno
 */  
 void GPIO_OUTPUT_DISABLE(uint8_t port){
-    GPIO_FUNC_OUT_SEL(port) -> REG ^= 0x100;
     GPIO_ENABLE -> REG_IO   ^= (1 << port) * !(port > IO31 && port <= IO39);
     GPIO_ENABLE_1 -> REG_IO ^= (1 << (port - IO32)) * (port > IO31 && port <= IO39);
     return;
@@ -126,7 +127,7 @@ bool GPIO_INPUT_READ(uint8_t port){
 /*! 
 * Funcion: GPIO_INTERRUPTION_SET
 * Pre-condiciones: Que el puerto seleccionado sea una entrada
-* Descripcion: Habilita la interrupcion de la entrada
+* Descripcion: Habilita la interrupcion de la entrada (Sin terminar)
 * Valores de entrada: Puerto, tipo de habilitacion, tipo de interrupcion
 * Valores de salida: Ninguno
 */  

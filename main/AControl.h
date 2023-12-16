@@ -86,7 +86,7 @@ extern void Access_Control();
 extern void Temperature_Control();
 extern void UART_Print();
 extern void States_Control();
-extern void OLED_Heartbeat();
+extern void LED_Heartbeat();
 
 #endif
 /*************** FIN DEL ARCHIVO ***************************************************************************/

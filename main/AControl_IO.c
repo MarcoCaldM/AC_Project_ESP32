@@ -41,7 +41,7 @@ int Cantidad_Max = 5;
 /*! 
 * Funcion: Initialize_GPIO
 * Pre-condiciones: Ninguna
-* Descripcion: Inicializar GPIO y sus interrupciones asociadas
+* Descripcion: Inicializar GPIO
 * Valores de entrada: Ninguno
 * Valores de salida: Ninguno
 */ 
@@ -113,7 +113,7 @@ void Initialize_UART() {
 }
 
 /*! 
-* Funcion: Temperature_Control
+* Funcion: Initialize_ADC
 * Pre-condiciones: Ninguna
 * Descripcion: Inicializa el ADC
 * Valores de entrada: Ninguno
@@ -253,7 +253,7 @@ void States_Control(){
 * Valores de entrada: Ninguno
 * Valores de salida: Ninguno
 */  
-void OLED_Heartbeat(){
+void LED_Heartbeat(){
     while (true){
         if (Enc_Apg_State == ENCENDIDO){    /*Solo si el sistema está encendido*/
             LED_Status = !LED_Status;       /*Alterna el estado del LED*/

@@ -149,7 +149,7 @@ typedef struct
  */
 typedef struct
 {
-    _IO uint32_t    REG_IO :7;
+    _IO uint32_t    REG_IO :8;
         uint32_t    RESERVED:24;
 } GPIO_GENERIC_O_1;
 
@@ -166,7 +166,7 @@ typedef struct
  */
 typedef struct 
 {   
-    _I uint32_t    REG_IO      :7;
+    _I uint32_t    REG_IO      :8;
        uint32_t    RESERVED    :24;
 } GPIO_GENERIC_I_1;
 

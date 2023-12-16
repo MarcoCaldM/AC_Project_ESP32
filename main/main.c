@@ -26,7 +26,7 @@ void app_main() {
     ssd1306_display_text(&dev, 0, "Sistema: OFF", 13, false); /*Y también lo imprime por la OLED*/
 
      /*Crea una tarea para el parpadeo del LED, la impresión constante del los estados por la OLED y la impresion de la UART*/
-    xTaskCreate(OLED_Heartbeat, "OLED_Hearbeat", 1024 * 2, NULL, 1, NULL);
+    xTaskCreate(LED_Heartbeat, "LED_Hearbeat", 1024 * 2, NULL, 1, NULL);
     xTaskCreate(UART_Print, "UART_Print", 1024 * 2, NULL, 2, NULL);
 
     while(true) {
