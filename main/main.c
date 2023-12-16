@@ -8,7 +8,6 @@
 ******************************************************************************/
 
 #include "AControl.h"
-#include "drivers/gpio_drivers.h"
 
 /*Variables globales del sistema*/
 bool Enc_Apg_State = false;

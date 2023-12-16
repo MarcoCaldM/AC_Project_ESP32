@@ -25,13 +25,13 @@
 #include "esp_system.h"
 #include "esp_event.h"
 #include "esp_log.h"
-#include "driver/gpio.h"
+#include "driver/gpio.h"    /*Drivers gpio Espressif para el manejo del RGB*/
 #include "driver/uart.h"
 #include "driver/adc.h"
 #include "ssd1306.h"
 #include "font8x8_basic.h"
 
-#include "drivers/gpio_drivers.h"
+#include "gpio_drivers.h"   /*Drivers gpio desarrollados por el equipo*/
 
 /******************************************************************************
 * Constantes del preprocesador
